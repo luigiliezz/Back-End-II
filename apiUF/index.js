@@ -1,14 +1,11 @@
-import express from('express');
-import colecaoUf from('./dados/dados.js');
-
-const buscarUfPorNome = (nomeUf) => {
-    return colecaoUf.filter(uf => uf.nome.ToLowerCase().includes(nomeUf.ToLowerCase()));
-};
+import express from 'express';
+import { buscarUfs, buscarUfId, buscarUfPorNome } from '/servicos/servicos.js';
 
 const app = express();
+
 app.get('/ufs', (req, res) => {
     const nomeUf = req.query.busca;
-    const resultado = nomeUf ? buscarUfPorNome(nomeUf) : colecaoUf ;
+    const resultado = nomeUf ? buscarUfPorNome(nomeUf) : buscarUfs() ;
     if (resultado.length > 0){
         res.json(resultado);
     } else {
@@ -17,24 +14,15 @@ app.get('/ufs', (req, res) => {
 });
 
 app.get('/ufs/:iduf', (req, res) => {
-    const idUF = parseInt(req.params.iduf);
-    let mensagemErro= '';
-    let uf;
+    const uf = buscarUfPorId(req.params.iduf);
     
-    if (!(isNaN(idUF))){
-        uf = colecaoUf.colecaoUf.find(itens => itens.id === idUF)
-        if (!uf){
-            mensagemErro = 'UF não encontrada';
-        }
-    } else{
-        mensagemErro = 'Requisição inválida'
-    }
-    if (uf){
+    if (uf) {
         res.json(uf);
-    } else{
-        res.status(404).json({"erro": mensagemErro})
+    } else if (isNaN(parseInt(req.params.iduf))) {
+        res.status(400).send({ "erro": "Requisição inválida" });
+    } else {
+        res.status(404).send({ "erro": " Uf não encontrda" });
     }
-    
     
 
  });

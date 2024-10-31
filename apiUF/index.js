@@ -1,5 +1,5 @@
-const express = require('express');
-const colecaoUf = require('./dados/dados.js');
+import express from('express');
+import colecaoUf from('./dados/dados.js');
 
 const buscarUfPorNome = (nomeUf) => {
     return colecaoUf.filter(uf => uf.nome.ToLowerCase().includes(nomeUf.ToLowerCase()));

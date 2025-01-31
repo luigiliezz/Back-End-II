@@ -3,7 +3,7 @@
 import Link from "next/link"
 import React, { useState } from 'react';
 import styles from "./Header.module.css";
-import Image from "next/image";
+// import Image from "next/image";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +17,7 @@ const Header = () => {
         <header className={styles.header}>
 
             <div className={styles.logo}>
-                <Image className={styles.img} src='/images/night.png' alt=" logo " width={50} height={150} />
+                {/* <Image className={styles.img} src='/images/night.png' alt=" logo " width={50} height={150} /> */}
                 
             </div>
 
@@ -36,19 +36,7 @@ const Header = () => {
                             <Link className={styles.link} href="/discografia">Disco</Link>
                         </li>
 
-                        <li>
-                            <Link className={styles.link} href="/lista">Lista</Link>
-                        </li>
-
-                        <li>
-                            <Link className={styles.link} href="/props">Props</Link>
-                        </li>
-
-                        <li>
-                            <Link className={styles.link} href="/Card">Card</Link>
-                        </li>
-
-
+                        
                     </ul>
                 </nav>
             }

@@ -35,3 +35,9 @@ export async function retornaCampeonatosTime(time) {
     conexao.release();
     return campeonatos;
 }
+
+async function executaQuery(conexao, query){
+    const resultado_query = await conexao.execute(query);
+    const resposta = resultado_query[0]
+    return resposta;
+}
